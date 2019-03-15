@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class DepositeWindow {
@@ -29,6 +30,7 @@ public class DepositeWindow {
 			Button finish = new Button("finish");
 			Button more = new Button("Another Transaction");
 			Label BalanceDisplay = new Label("");
+			Label validationLabel = new Label("");
 			
 			GridPane grid = new GridPane();
 			grid.add(depositeLabel, 0, 0);
@@ -37,20 +39,29 @@ public class DepositeWindow {
 			grid.add(finish, 1, 2);
 			grid.add(more, 2, 2); 
 			grid.add(BalanceDisplay, 1, 3); 
+			grid.add(validationLabel, 1, 4); 
+
 			
 			
 			add.setOnAction(new EventHandler<ActionEvent>(){
 		    	@Override
 			public void handle(ActionEvent event) { 
 	    			String Add = depositeField.getText();
-	    			deposit.Deposite(Add);
-	    			newBalance = deposit.getBalance();
-	    	    	BalanceDisplay.setText("your current balance="+deposit.getBalance());
-
-
+	    			
+	    			int amount = Integer.parseInt(depositeField.getText());
+		    			if( amount > 0 ) {
+		    				deposit.Deposite(Add);
+		    			newBalance = deposit.getBalance();
+		    	    	BalanceDisplay.setText("your current balance="+deposit.getBalance());}
+			    		 
+			    		else  { 
+			    		
+			    				validationLabel.setText("warning!!! you added a negative number");
+				    			validationLabel.setFont(new Font("verdana",20));
+			    		
 		    	}   
 			  
-		});
+		    	}});
 			finish.setOnAction(new EventHandler<ActionEvent>(){
 		    	@Override
 			public void handle(ActionEvent event) { 
@@ -67,7 +78,7 @@ public class DepositeWindow {
 
 		    	} 
 		});
-			scene = new Scene(grid,600,600);
+			scene = new Scene(grid,800,600);
 			
 		}
 		
@@ -89,4 +100,4 @@ public class DepositeWindow {
 
 	
 	 
-}
+} 

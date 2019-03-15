@@ -54,28 +54,29 @@ public class WithdrawWindow {
 	    	@Override
 		public void handle(ActionEvent event) {  
 	    		String Add = withdrawField.getText();
-	    		boolean isInteger = Pattern.matches("[0-9]", Add);
-	    		int amount = Integer.parseInt(withdrawField.getText());
-	    		if(withdraws.getBalance() > amount && amount > 0 && isInteger == true) {
-		    		withdraws.Withdraw(Add);
-    			newBalance = withdraws.getBalance();
-    	    	BalanceDisplay.setText("your current balance="+withdraws.getBalance());}
 	    		
-	    		else   
-	    		{
-	    			if(amount < 0) {
-	    				validationLabel.setText("warning!!! you added a negative number");
+	    		int amount = Integer.parseInt(withdrawField.getText());
+	    		try {
+	    			if(withdraws.getBalance() > amount && amount > 0 ) {
+			    		withdraws.Withdraw(Add);
+	    			newBalance = withdraws.getBalance();
+	    	    	BalanceDisplay.setText("your current balance="+withdraws.getBalance());}
+		    		 
+		    		else   
+		    		{
+		    			if(amount < 0) {
+		    				validationLabel.setText("warning!!! you added a negative number");
+			    			validationLabel.setFont(new Font("verdana",20));
+		    			}
+		    			else
+			    			validationLabel.setText("warning!!! you don't have enough money :(");
+			    			validationLabel.setFont(new Font("verdana",20));
+			    		}
+	    		}catch(NumberFormatException e) {
+	    			
+	      				validationLabel.setText("warning!!! you added letters");
 		    			validationLabel.setFont(new Font("verdana",20));
 	    			}
-	    			else if( isInteger == false) { 
-	    				validationLabel.setText("warning!!! you added letters");
-		    			validationLabel.setFont(new Font("verdana",20));
-	    			}
-	    			else
-	    			validationLabel.setText("warning!!! you don't have enough money :(");
-	    			validationLabel.setFont(new Font("verdana",20));
-	    		}
-
 	    		
 	    		 
 	    	} 
