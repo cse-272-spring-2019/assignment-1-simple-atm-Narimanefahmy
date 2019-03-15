@@ -55,15 +55,16 @@ public class WithdrawWindow {
 		public void handle(ActionEvent event) {  
 	    		String Add = withdrawField.getText();
 	    		
-	    		int amount = Integer.parseInt(withdrawField.getText());
+	    		
 	    		try {
+	    			int amount = Integer.parseInt(withdrawField.getText());
 	    			if(withdraws.getBalance() > amount && amount > 0 ) {
 			    		withdraws.Withdraw(Add);
 	    			newBalance = withdraws.getBalance();
 	    	    	BalanceDisplay.setText("your current balance="+withdraws.getBalance());}
 		    		 
 		    		else   
-		    		{
+		    		{ 
 		    			if(amount < 0) {
 		    				validationLabel.setText("warning!!! you added a negative number");
 			    			validationLabel.setFont(new Font("verdana",20));

@@ -47,10 +47,10 @@ public class DepositeWindow {
 		    	@Override
 			public void handle(ActionEvent event) { 
 	    			String Add = depositeField.getText();
-	    			
+	    			try {
 	    			int amount = Integer.parseInt(depositeField.getText());
 		    			if( amount > 0 ) {
-		    				deposit.Deposite(Add);
+		    				deposit.Deposite(Add); 
 		    			newBalance = deposit.getBalance();
 		    	    	BalanceDisplay.setText("your current balance="+deposit.getBalance());}
 			    		 
@@ -59,7 +59,11 @@ public class DepositeWindow {
 			    				validationLabel.setText("warning!!! you added a negative number");
 				    			validationLabel.setFont(new Font("verdana",20));
 			    		
-		    	}   
+		    	} }catch(NumberFormatException e) {
+	    			
+      				validationLabel.setText("warning!!! you added letters");
+	    			validationLabel.setFont(new Font("verdana",20));
+    			}  
 			  
 		    	}});
 			finish.setOnAction(new EventHandler<ActionEvent>(){
